@@ -13,8 +13,11 @@
 
 2) Para capturar la señal electromiográfica de su brazo, coloque dos electrodos en los músculos que desea analizar y otro en una protuberancia ósea que funcionara como tierra. Conecte los cables a los electrodos y al módulo ECG AD8232; alimentar a 3.3V, conectar a tierra y conectar la salida del modulo a una de las entradas del DAQ.
 
-3) Conectar el DAQ al computador, debería de abrirse una ventana con el software del DAQ en el que se ajustan varios áspectos como la amplitud de los ejes y la frecuencia de muestreo 
+3) Conectar el DAQ al computador, debería de abrirse una ventana con el software del DAQ en el que se ajustan varios áspectos como la amplitud de los ejes y la frecuencia de muestreo. Cuando este todo preparado, dar click al boton de start y comenzar a hacer las contracciones continuas hasta llegar a ese momento de la fsatiga; mientras esto sucede se verá en la ventana del DAQ la señal a tiempo real. Por último dar click en stop cuando haya terminado.
 
+4) NO SE LO DE MATLAB
+   
+6) Correr el programa, esperar a que se compile por completo y si todo está en orden, se verán los resultados en el terminal de comandos de la manera que se muestra en la siguiente figura con sus respectivas gráficas.
 
 ## REQUERIMIENTOS
 - DAQ
