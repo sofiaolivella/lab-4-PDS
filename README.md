@@ -12,6 +12,8 @@
 ## REQUERIMIENTOS
 - Python 3.11
 - Spyder 6.0
+- NI-DAQmx
+- Matlab
 - Librerias como: wfdb, matplotlib, numpy, scipy.io.wavfile, sklearn, sounddevice
 
 ## REFERENCIAS
