@@ -35,7 +35,47 @@ Para graficar el comportamiento de la señal se implementó el siguiente código
 
 ### Filtros
 ### Aventananientos Hamming y transformada de fourier
+
+## Ventana de Hamming
+Con el objetivo de analizar la evolución espectral de la señal EMG a lo largo del tiempo y minimizar los efectos de las discontinuidades en los bordes de los segmentos, se aplicó una ventana de Hamming sobre segmentos de la señal. El aventanamiento consiste en dividir la señal en bloques de tamaño fijo y multiplicarlos por una función ventana que atenúa los extremos del bloque, evitando fugas espectrales.
+
+
+     ventana = 2048  # Tamaño de la ventana
+     hamming_window = np.hamming(ventana)
+
+En donde se utilizó un tamaño de ventana de 2048 muestras y se aplicó la función np.hamming() para generar la ventana correspondiente. 
+
+## Transformada de Fourier
+Para estudiar la distribución de frecuencias y observar la aparición de fatiga muscular, se aplicó la Transformada Rápida de Fourier (FFT) a cada uno de los segmentos aventanados, para así poder obtener el espectro de amplitud de la señal EMG y calcular la frecuencia mediana, la cual tiende a disminuir progresivamente como signo de fatiga muscular.
+
+     frecuencia_mediana = []
+     for segmento in segmentos:
+     fft_segmento = np.fft.fft(segmento)
+     freqs = np.fft.fftfreq(len(segmento), d=1/fs_mean)
+     magnitud = np.abs(fft_segmento)
+     
+     freqs_pos = freqs[freqs >= 0]
+     magnitud_pos = magnitud[freqs >= 0]
+
+     energia_total = np.sum(magnitud_pos)
+     energia_acumulada = np.cumsum(magnitud_pos)
+     idx_mediana = np.where(energia_acumulada >= energia_total / 2)[0][0]
+     frecuencia_mediana.append(freqs_pos[idx_mediana])
+
+En primer lugar se aplicó la función np.fft.fft() para transformar cada segmento al dominio de la frecuencia, luego, se realizó el cálculo de las frecuencias correspondientes y se filtraron las componentes positivas.
+
 ### Análisis espectral
+
+El análisis espectral de la señal EMG tiene como finalidad identificar los cambios en la distribución de frecuencia de la señal a lo largo del tiempo, permitiendo evaluar la presencia de fatiga muscular.
+
+Se puede iniciar destacando la frecuencia mediana la cual representa la frecuencia que divide el espectro de la señal en dos áreas de igual energía, de esta manera durante un esfuerzo sostenido, la frecuencia mediana tiende a desplazarse hacia valores más bajos debido a la disminución en la conducción de los potenciales de acción musculares, lo que es un indicativo de la aparición de fatiga.
+
+Para cada segmento de la señal previamente aventanado con la ventana de Hamming, se calculó la FFT, obteniendo así el espectro de frecuencias correspondiente,  y puesto que la FFT produce un espectro simétrico, sólo se consideraron las frecuencias positivas para el análisis.
+
+        fft_segmento = np.fft.fft(segmento)
+        freqs = np.fft.fftfreq(len(segmento), d=1/fs_mean)
+        magnitud = np.abs(fft_segmento)
+   
 
 ## Instrucciones
 1) En primer lugar descargar o copiar y pegar el código de Python subido en este repositorio, el cuál esta guardado como "lab4.py", en el compilador que desee preferiblemente "Spyder". Cabe recalcar que debe asegurarse que se encuentren las librerias enlistadas en los requerimientos para que pueda compilarse adecuadamente el programa y muestre tanto las gráficas deseadas como los resultados de los cálculos. Adicionalmente como se esta trabajando con los DAQ debe de también tener instalado el "DAQ.mx" y su respectivo modulo en Python.
