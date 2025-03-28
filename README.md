@@ -76,6 +76,31 @@ Para cada segmento de la señal previamente aventanado con la ventana de Hamming
         freqs = np.fft.fftfreq(len(segmento), d=1/fs_mean)
         magnitud = np.abs(fft_segmento)
    
+## Creación de la hipótesis
+
+     primera_contraccion = frecuencia_mediana[:5]
+     ultima_contraccion = frecuencia_mediana[-5:]
+
+     media1 = np.mean(primera_contraccion)
+     media2 = np.mean(ultima_contraccion)
+     s1 = np.std(primera_contraccion, ddof=1)
+     s2 = np.std(ultima_contraccion, ddof=1)
+     n1 = len(primera_contraccion)
+     n2 = len(ultima_contraccion)
+
+     t = (media1 - media2) / np.sqrt((s1**2 / n1) + (s2**2 / n2))
+
+1. Para establecer la hipótesis se utilizaron las siguientes fórmulas:
+   - H0: u1-u2=0
+   - Ha: u1-u20
+Por lo que se pudo determinar que no existe una diferencia importante entre la primera contracción y la última.
+
+2. El estadístico de prueba se muestra implementado en el código anterior.
+3. el valor crítico se aplicó manualmengte con  α = 0.05 y 4 grados de libertad, de manera que el tcrítico= 2,77
+4. Se puede concluir que como ∣t∣=3.1256>2.776, es claramente rechazado, en el sentido de que hay una gran diferencia entre la primera y última contracción.
+
+
+
 
 ## Instrucciones
 1) En primer lugar descargar o copiar y pegar el código de Python subido en este repositorio, el cuál esta guardado como "lab4.py", en el compilador que desee preferiblemente "Spyder". Cabe recalcar que debe asegurarse que se encuentren las librerias enlistadas en los requerimientos para que pueda compilarse adecuadamente el programa y muestre tanto las gráficas deseadas como los resultados de los cálculos. Adicionalmente como se esta trabajando con los DAQ debe de también tener instalado el "DAQ.mx" y su respectivo modulo en Python.
