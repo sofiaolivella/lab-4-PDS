@@ -84,9 +84,9 @@ Para cada segmento de la señal previamente aventanado con la ventana de Hamming
 
 3) Conectar el DAQ al computador, debería de abrirse una ventana con el software del DAQ en el que se ajustan varios áspectos como la amplitud de los ejes y la frecuencia de muestreo. Cuando este todo preparado, dar click al boton de start y comenzar a hacer las contracciones continuas hasta llegar a ese momento de la fsatiga; mientras esto sucede se verá en la ventana del DAQ la señal a tiempo real. Por último dar click en stop cuando haya terminado.
 
-4) NO SE LO DE MATLAB
+4) 
    
-6) Correr el programa, esperar a que se compile por completo y si todo está en orden, se verán los resultados en el terminal de comandos de la manera que se muestra en la siguiente figura con sus respectivas gráficas.
+5) Correr el programa, esperar a que se compile por completo y si todo está en orden, se verán los resultados en el terminal de comandos de la manera que se muestra en la siguiente figura con sus respectivas gráficas.
 
 ## REQUERIMIENTOS
 - DAQ
@@ -99,8 +99,8 @@ Para cada segmento de la señal previamente aventanado con la ventana de Hamming
 - Librerias como: wfdb, matplotlib, numpy, scipy.io.wavfile, sklearn, sounddevice
 
 ## REFERENCIAS
-[1] 
-[2] 
+[1] Oppenheim, A. V., & Schafer, R. W. (2010). Discrete-Time Signal Processing (3rd ed.). Pearson.
+[2] Smith, S. W. (1997). The Scientist and Engineer's Guide to Digital Signal Processing. California Technical Publishing.
 
 ## AUTORES
 - Juan Diego Clavijo Fuentes
